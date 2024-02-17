@@ -16,6 +16,30 @@ public class TestReflectionApi2 {
         getMethodsReturnType();
         createNewInstance();
         getConstructorsParameters();
+        createNewInstance2();
+    }
+
+    /**
+     * В этом методе с помощью ReflectionApi мы пытаемся создать
+     * экземпляр класса Employee с помощью Class
+     */
+    private static void createNewInstance2() {
+        Class<?> clazz = null;
+        try {
+            clazz = Class.forName(Employee.class.getName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            if (clazz != null) {
+                Employee employee = (Employee)clazz
+                        .getConstructor(int.class, String.class)
+                        .newInstance(28, "zoro");
+                System.out.println(employee);
+            }
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
