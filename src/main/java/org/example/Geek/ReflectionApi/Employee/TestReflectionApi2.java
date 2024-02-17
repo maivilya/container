@@ -8,6 +8,30 @@ public class TestReflectionApi2 {
     public static void main(String[] args) {
         getEmployeeInfo();
         getEmployeeMethodInfo();
+        changePrivateField();
+    }
+
+    /**
+     * В этом методе с помощью ReflectionApi мы пытаемся изменить ПРИВАТНОЕ
+     * поле у объекта employee
+     */
+    private static void changePrivateField() {
+        Employee employee = new Employee();
+        int number = employee.getNumber();
+        String name = null;
+        System.out.println("employee = " + employee);
+        System.out.println("number + name = " + number + name);
+
+        try {
+            Field fieldName = employee.getClass().getDeclaredField("name");
+            fieldName.setAccessible(true);
+            fieldName.set(employee, "new name from fieldName");
+            name = (String) fieldName.get(employee);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        System.out.println("\nemployee = " + employee);
+        System.out.println("number + name = " + number + name);
     }
 
     /**
