@@ -1,6 +1,7 @@
 package org.example.Geek.ReflectionApi.Animals;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class TestReflectionApi {
@@ -23,6 +24,34 @@ public class TestReflectionApi {
             System.out.println(getObjectMethods(animal));
         }
         // #endregion
+
+        // #region do method on object
+        String methodName = "sleepAllDay";
+        for (AbstractAnimal animal : animals) {
+            executeMethodOnObject(animal, methodName);
+        }
+        // #endregion
+    }
+
+    /**
+     * С помощью ReflectionApi получаем методы объекта
+     * @param object     объект, у которого нужно выполнить метод
+     * @param methodName название метода, который нужно выполнить у объекта
+     */
+    private static void executeMethodOnObject(Object object, String methodName) {
+        Method method;
+        try {
+            method = object.getClass().getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            return;
+        }
+
+        try {
+            method.setAccessible(true);
+            method.invoke(object);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
