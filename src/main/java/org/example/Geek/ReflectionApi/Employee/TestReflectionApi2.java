@@ -1,5 +1,6 @@
 package org.example.Geek.ReflectionApi.Employee;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,6 +15,27 @@ public class TestReflectionApi2 {
         executeMethodOnObject();
         getMethodsReturnType();
         createNewInstance();
+        getConstructorsParameters();
+    }
+
+    /**
+     * В этом методе с помощью ReflectionApi мы пытаемся получить
+     * типы параметров всех конструкторов у класса Employee с помощью Class
+     */
+    private static void getConstructorsParameters() {
+        Class<?> clazz;
+        try {
+            clazz = Class.forName(Employee.class.getName());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Constructor[] constructors = clazz.getConstructors();
+        for (Constructor con : constructors) {
+            Class[] params = con.getParameterTypes();
+            for (Class param : params) {
+                System.out.println(param.getSimpleName());
+            }
+        }
     }
 
     /**
