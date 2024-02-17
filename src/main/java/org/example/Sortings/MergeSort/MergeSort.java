@@ -1,4 +1,4 @@
-package org.example.Sortings;
+package org.example.Sortings.MergeSort;
 
 public class MergeSort {
 
