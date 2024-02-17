@@ -3,6 +3,7 @@ package org.example.Geek.ReflectionApi.Employee;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public class TestReflectionApi2 {
 
@@ -11,6 +12,34 @@ public class TestReflectionApi2 {
         getEmployeeMethodInfo();
         changePrivateField();
         executeMethodOnObject();
+        getMethodsReturnType();
+    }
+
+    /**
+     * В этом методе с помощью ReflectionApi мы пытаемся получить типы
+     * возвращаемых значений у методов на объекте employee,
+     * а конкретно getNumber() и setNumber(int, String)
+     */
+    private static void getMethodsReturnType() {
+        final Employee employee = new Employee();
+        try {
+            System.out.println("getReturnType() = "
+                    + employee.getClass()
+                    .getDeclaredMethod("getNumber")
+                    .getReturnType());
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+
+        Class<?>[] types;
+        try {
+            types = employee.getClass()
+                    .getDeclaredMethod("setNumber", int.class, String.class)
+                    .getParameterTypes();
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(Arrays.toString(types));
     }
 
     /**
