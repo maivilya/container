@@ -1,6 +1,7 @@
 package org.example.Geek.ReflectionApi.Animals;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class TestReflectionApi {
 
@@ -12,15 +13,35 @@ public class TestReflectionApi {
                 new Cat(19, "Bagira", Color.GREEN)
         };
 
-        // #region get info(fields) about object
+        // #region get info(fields and methods) about object
         for (AbstractAnimal animal : animals) {
             try {
                 System.out.println(getObjectFields(animal));
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
+            System.out.println(getObjectMethods(animal));
         }
         // #endregion
+    }
+
+    /**
+     * С помощью ReflectionApi получаем методы объекта
+     * @param object объект, у которого нужно получить методы
+     * @return       строка, содержащая поля объекта(конечно нужно возвращать Method[], но это для упрощения)
+     */
+    private static String getObjectMethods(Object object)  {
+        StringBuilder sb;
+        Method[]      methods;
+        sb = new StringBuilder("Methods\n");
+
+        methods = object.getClass().getDeclaredMethods();
+        for (Method method : methods) {
+            method.setAccessible(true);
+            sb.append(method.getName()).append("\n");
+        }
+
+        return sb.toString();
     }
 
     /**
