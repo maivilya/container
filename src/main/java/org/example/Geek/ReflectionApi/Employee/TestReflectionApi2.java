@@ -1,6 +1,7 @@
 package org.example.Geek.ReflectionApi.Employee;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class TestReflectionApi2 {
@@ -9,6 +10,24 @@ public class TestReflectionApi2 {
         getEmployeeInfo();
         getEmployeeMethodInfo();
         changePrivateField();
+        executeMethodOnObject();
+    }
+
+    /**
+     * В этом методе с помощью ReflectionApi мы пытаемся выполнить метод
+     * у объекта employee, а конкретно setNumber(int, String)
+     */
+    private static void executeMethodOnObject() {
+        Employee employee = new Employee();
+        System.out.println("employee = " + employee);
+        try {
+            Method method = employee.getClass().getDeclaredMethod("setNumber", int.class, String.class);
+            method.setAccessible(true);
+            method.invoke(employee, 20, "20");
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException exception) {
+            exception.printStackTrace();
+        }
+        System.out.println("employee = " + employee);
     }
 
     /**
