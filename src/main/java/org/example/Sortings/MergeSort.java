@@ -3,6 +3,32 @@ package org.example.Sortings;
 public class MergeSort {
 
     /**
+     * Метод сортировки массива
+     * @param array неотсортированный массив
+     * @return      отсортированный массив
+     */
+    public static int[] sort(int[] array) {
+        int[] temp;
+        int[] currentArray = array;
+        int[] currentDest = new int[array.length];
+
+        int size = 1;
+        while (size < array.length) {
+            for (int i = 0; i < array.length; i += size * 2) {
+                merge(currentArray, i, currentArray, i + size, currentDest, i, size);
+            }
+
+            temp = currentArray;
+            currentArray = currentDest;
+            currentDest = temp;
+
+            size *= 2;
+        }
+
+        return currentArray;
+    }
+
+    /**
      * Слияние двух массивов в один(исходные массивы отсортированны, результирующий массив отсортирован)
      * @param src1      первый подмассив
      * @param src1Start точка старта слияния из первого подмассива
