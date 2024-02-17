@@ -13,6 +13,23 @@ public class TestReflectionApi2 {
         changePrivateField();
         executeMethodOnObject();
         getMethodsReturnType();
+        createNewInstance();
+    }
+
+    /**
+     * В этом методе с помощью ReflectionApi мы пытаемся получить
+     * экземпляр класса Employee(instance) с помощью Class
+     */
+    private static void createNewInstance() {
+        Employee employee = null;
+        System.out.println(employee);
+        try {
+            Class<?> clazz = Class.forName(Employee.class.getName());
+            employee = (Employee) clazz.newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        System.out.println(employee);
     }
 
     /**
