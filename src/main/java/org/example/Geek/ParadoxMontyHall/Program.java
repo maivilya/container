@@ -17,7 +17,7 @@ public class Program {
     private static final int ATTEMPTS = 1000;
 
     public static void main(String[] args) {
-
+        imitationGame();
     }
 
     /**
