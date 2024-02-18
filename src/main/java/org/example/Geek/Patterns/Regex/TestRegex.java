@@ -16,6 +16,21 @@ public class TestRegex {
         match();
         match2();
         match3();
+        match4();
+    }
+
+    /**
+     * Метод matches() пытается сопоставить весь регион с образцом.
+     * Возвращает true, если и только если вся последовательность регионов соответствует шаблону этого матчера.
+     * Метод lookingAt() пытается сопоставить входную последовательность, начиная с начала региона, с шаблоном.
+     * Как и метод matches, этот метод всегда начинает с начала области;
+     * в отличие от этого метода, он не требует, чтобы вся область была сопоставлена.
+     */
+    private static void match4() {
+        Pattern pattern = Pattern.compile("\\w*");
+        Matcher matcher = pattern.matcher("abc!");
+        System.out.println("matcher.matches() = " + matcher.matches());
+        System.out.println("matcher.lookingAt() = " + matcher.lookingAt());
     }
 
     /**
