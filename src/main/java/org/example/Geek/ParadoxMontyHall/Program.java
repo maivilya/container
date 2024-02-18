@@ -21,6 +21,20 @@ public class Program {
     }
 
     /**
+     * Метод выводит информацию о статистике по определенной статистике игр
+     * @param statistic ститистика игр
+     */
+    private static void printStatistic(Map<Integer, Boolean> statistic) {
+        int win = 0;
+        for (Map.Entry<Integer, Boolean> entry : statistic.entrySet()) {
+            if (entry.getValue()) {
+                win ++;
+            }
+        }
+        System.out.println("\nКоличество побед: " + win + " раз из " + ATTEMPTS + " попыток.");
+    }
+
+    /**
      * За каждую дверь ставим козла, но за одну случайную дверь ставим главный приз - машину.
      */
     private static void initDoors() {
