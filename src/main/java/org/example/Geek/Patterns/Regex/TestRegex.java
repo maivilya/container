@@ -18,6 +18,33 @@ public class TestRegex {
         match3();
         match4();
         repetitive();
+        checkLoginLength();
+    }
+
+    /**
+     * Это задача с HackerRank, в ней необходимо было проверить логин
+     * пользователя на валидность
+     */
+    private static void checkLoginLength() {
+        final String regex = "^[a-zA-Z][a-zA-Z0-9_]{6,19}$";
+        final Scanner scanner = new Scanner(System.in);
+        int countLines = Integer.parseInt(scanner.nextLine());
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher;
+        String line;
+        while (countLines > 0) {
+            line = scanner.nextLine();
+            matcher = pattern.matcher(line);
+            boolean isFind = true;
+            while (matcher.find()) {
+                System.out.println("Valid");
+                isFind = false;
+            }
+            if (isFind) {
+                System.out.println("Invalid");
+            }
+            countLines--;
+        }
     }
 
     /**
