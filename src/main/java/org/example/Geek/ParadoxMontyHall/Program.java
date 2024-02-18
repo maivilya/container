@@ -20,6 +20,39 @@ public class Program {
     }
 
     /**
+     * В этом методе мы намеренно заставляем игрока быть верным своему изнчальному выбору.
+     * По сути, в этом методе переменная leadingOpenDoor не нужна, потому что визуально(графически)
+     * мы двери не открываем, и переменная secondChoice в любом случае будет равна firstChoice.
+     * @param attempt игровой шаг
+     */
+    private static void playerDoNotChangeDoor(int attempt) {
+        int winDoor = -1;
+        int firstChoice = random.nextInt(DOORS_COUNT);
+        int leadingChoiceDoor = -1;
+        int secondChoice = -1;
+
+        for (int i = 0; i < DOORS.length; i++) {
+            if (DOORS[i] == DOT_CAR) {
+                winDoor = i;
+            }
+        }
+
+        for (int i = 0; i < DOORS.length; i++) {
+            if ((i != winDoor) && (i != firstChoice)) {
+                leadingChoiceDoor = i;
+            }
+        }
+
+        for (int i = 0; i < DOORS.length; i++) {
+            if (i == firstChoice) {
+                secondChoice = firstChoice;
+                break;
+            }
+        }
+        STATISTIC_D0_NOT_CHANGE_DOOR.put(attempt, secondChoice == winDoor);
+    }
+
+    /**
      * В этом методе мы намеренно заставляем игрока изменить свой выбор.
      * @param attempt игровая попытка
      */
