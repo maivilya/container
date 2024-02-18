@@ -11,7 +11,25 @@ public class TestRegex {
     public static void main(String[] args) {
 
         checkXMLTeg();
+        match();
 
+    }
+
+    /**
+     * В этом методы мы ищем все соответствия в тексте,
+     * считаем их количество и выводим их на экран
+     */
+    private static void match() {
+        String regex = "кот\\b";
+        String text = "котенок котяра кот котел кот байкот";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(text);
+        int count = 0;
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+            count++;
+        }
+        System.out.println(count);
     }
 
     /**
