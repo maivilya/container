@@ -1,5 +1,6 @@
 package org.example.Geek.ParadoxMontyHall;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -17,6 +18,14 @@ public class Program {
 
     public static void main(String[] args) {
 
+    }
+
+    /**
+     * За каждую дверь ставим козла, но за одну случайную дверь ставим главный приз - машину.
+     */
+    private static void initDoors() {
+        Arrays.fill(DOORS, DOT_GOAT);
+        DOORS[random.nextInt(3)] = DOT_CAR;
     }
 
     /**
