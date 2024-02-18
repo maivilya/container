@@ -8,6 +8,21 @@ public class TestThreads {
 
 }
 
+class ThreadDecrementor extends Thread {
+    private final Counter counter;
+
+    ThreadDecrementor(Counter counter) {
+        this.counter = counter;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 50_000; i++) {
+            counter.decrement();
+        }
+    }
+}
+
 class ThreadIncrementer extends Thread {
     private final Counter counter;
 
