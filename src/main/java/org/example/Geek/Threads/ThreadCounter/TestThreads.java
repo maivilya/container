@@ -3,7 +3,21 @@ package org.example.Geek.Threads.ThreadCounter;
 public class TestThreads {
 
     public static void main(String[] args) {
+        Counter counter = new Counter();
 
+        ThreadIncrementer t1 = new ThreadIncrementer(counter);
+        ThreadDecrementor t2 = new ThreadDecrementor(counter);
+
+        t1.start();
+        t2.start();
+
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("counter.getCount() = " + counter.getCount());
     }
 
 }
