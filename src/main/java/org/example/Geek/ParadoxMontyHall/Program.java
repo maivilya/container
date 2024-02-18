@@ -21,6 +21,21 @@ public class Program {
     }
 
     /**
+     * Метод имитирует игры для разных случаев
+     */
+    private static void imitationGame() {
+        int currentAttempt = 1;
+        while (currentAttempt <= ATTEMPTS) {
+            initDoors();
+            playerDoNotChangeDoor(currentAttempt);
+            playerChangeDoor(currentAttempt);
+            currentAttempt++;
+        }
+        printStatistic(STATISTIC_D0_NOT_CHANGE_DOOR);
+        printStatistic(STATISTIC_CHANGE_DOOR);
+    }
+
+    /**
      * Метод выводит информацию о статистике по определенной статистике игр
      * @param statistic ститистика игр
      */
