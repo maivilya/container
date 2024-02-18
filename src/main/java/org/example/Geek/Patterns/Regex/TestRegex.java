@@ -1,5 +1,7 @@
 package org.example.Geek.Patterns.Regex;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,6 +15,17 @@ public class TestRegex {
         checkXMLTeg();
         match();
         match2();
+        match3();
+    }
+
+    /**
+     * В этом методы мы ищем все соответствия в тексте,
+     * считаем их количество и выводим их на экран
+     */
+    private static void match3() {
+        List<String> languages = Arrays.asList("java", "C", "c++", "c#", "javascript", "scala", "Sova");
+        Pattern pattern = Pattern.compile("^[c\\-Cs\\-S]");
+        languages.stream().filter(pattern.asPredicate()).forEach(System.out::println);
     }
 
     /**
