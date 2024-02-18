@@ -12,7 +12,22 @@ public class TestRegex {
 
         checkXMLTeg();
         match();
+        match2();
+    }
 
+    /**
+     * В этом методы мы ищем все соответствия в тексте,
+     * выводим их на экран, а так же выводим на экран
+     * индекс начала и индекс конца соответствия.
+     */
+    private static void match2() {
+        String s = scanner.nextLine();
+        Pattern pattern = Pattern.compile("apple");
+        Matcher matcher = pattern.matcher(s);
+        while (matcher.find()) {
+            System.out.println("Found [" + matcher.group() + "], start: "
+                    + matcher.start() + "; end: " + (matcher.end() - 1));
+        }
     }
 
     /**
