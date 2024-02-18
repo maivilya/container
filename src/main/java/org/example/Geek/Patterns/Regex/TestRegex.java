@@ -17,6 +17,17 @@ public class TestRegex {
         match2();
         match3();
         match4();
+        repetitive();
+    }
+
+    /**
+     * В этом методы мы ищем все повторяющиеся символы по шаблону(точка),
+     * и заменяем их с помощью метода replaceAll
+     */
+    private static void repetitive() {
+        Pattern pattern = Pattern.compile("\\.+");
+        Matcher matcher = pattern.matcher("Hello.. I'm Ilya... Go to the cinema..");
+        System.out.println("matcher.replaceAll(\".\") = " + matcher.replaceAll("."));
     }
 
     /**
