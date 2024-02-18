@@ -18,4 +18,34 @@ public class Program {
     public static void main(String[] args) {
 
     }
+
+    /**
+     * В этом методе мы намеренно заставляем игрока изменить свой выбор.
+     * @param attempt игровая попытка
+     */
+    private static void playerChangeDoor(int attempt) {
+        int winDoor = -1;
+        int firstChoice = random.nextInt(DOORS_COUNT);
+        int leadingChoiceDoor = -1;
+        int secondChoice = -1;
+
+        for (int i = 0; i < DOORS.length; i++) {
+            if (DOORS[i] == DOT_CAR) {
+                winDoor = i;
+            }
+        }
+
+        for (int i = 0; i < DOORS.length; i++) {
+            if ((i != winDoor) && (i != firstChoice)) {
+                leadingChoiceDoor = i;
+            }
+        }
+
+        for (int i = 0; i < DOORS.length; i++) {
+            if ((i != firstChoice) && (i != leadingChoiceDoor)) {
+                secondChoice = i;
+            }
+        }
+        STATISTIC_CHANGE_DOOR.put(attempt, secondChoice == winDoor);
+    }
 }
