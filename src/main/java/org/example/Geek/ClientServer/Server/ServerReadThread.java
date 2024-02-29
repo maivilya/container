@@ -19,7 +19,7 @@ public class ServerReadThread extends Thread {
         } catch (IOException exception) {
             System.out.println("Exception: " + exception.getMessage());
         }
-        this.start();
+        this.run();
     }
 
     @Override
