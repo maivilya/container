@@ -5,7 +5,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class ClientVersion1 {
+public class Client {
 
     private static final int PORT = 4305;
 
