@@ -20,6 +20,9 @@ public class ClientVersion1 {
             DataInputStream dataInputStream = new DataInputStream(inputStream);
             PrintStream printStream = new PrintStream(outputStream);
 
+            printStream.println("pop");
+            System.out.println(dataInputStream.readLine());
+
             clientSocket.close();
         } catch (UnknownHostException  exception) {
             System.out.println("Exception: " + exception.getMessage());
