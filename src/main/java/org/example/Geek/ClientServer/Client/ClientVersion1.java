@@ -1,9 +1,9 @@
 package org.example.Geek.ClientServer.Client;
 
+import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.io.IOException;
 
 public class ClientVersion1 {
 
@@ -14,8 +14,12 @@ public class ClientVersion1 {
         try {
             InetAddress address = InetAddress.getLocalHost();
             clientSocket = new Socket(address, PORT);
-            System.out.println(clientSocket.getInetAddress());
-            System.out.println(clientSocket.getLocalPort());
+
+            InputStream inputStream = clientSocket.getInputStream();
+            OutputStream outputStream = clientSocket.getOutputStream();
+            DataInputStream dataInputStream = new DataInputStream(inputStream);
+            PrintStream printStream = new PrintStream(outputStream);
+
             clientSocket.close();
         } catch (UnknownHostException  exception) {
             System.out.println("Exception: " + exception.getMessage());
