@@ -7,13 +7,16 @@ import java.io.IOException;
 
 public class ClientVersion1 {
 
+    private static final int PORT = 4305;
+
     public static void main(String[] args) {
-        Socket clietnSocket;
+        Socket clientSocket;
         try {
             InetAddress address = InetAddress.getLocalHost();
-            clietnSocket = new Socket(address, 4305);
-            System.out.println(clietnSocket.getInetAddress());
-            clietnSocket.close();
+            clientSocket = new Socket(address, PORT);
+            System.out.println(clientSocket.getInetAddress());
+            System.out.println(clientSocket.getLocalPort());
+            clientSocket.close();
         } catch (UnknownHostException  exception) {
             System.out.println("Exception: " + exception.getMessage());
         } catch (IOException exception) {
