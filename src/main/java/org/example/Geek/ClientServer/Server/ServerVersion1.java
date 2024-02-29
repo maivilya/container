@@ -1,6 +1,8 @@
 package org.example.Geek.ClientServer.Server;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.UnknownHostException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -14,6 +16,11 @@ public class ServerVersion1 {
             ServerSocket serverSocket = new ServerSocket(PORT);
             System.out.println("Server is started");
             Socket clientSocket = serverSocket.accept();
+
+            OutputStream outputStream = clientSocket.getOutputStream();
+            PrintStream printStream = new PrintStream(outputStream);
+            printStream.println("Hello, client!");
+
             serverSocket.close();
             clientSocket.close();
         } catch (UnknownHostException exception) {
