@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerVersion1 {
+public class Server {
 
     private static final int PORT = 4305;
 
