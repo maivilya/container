@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 public class Client {
 
@@ -15,14 +16,18 @@ public class Client {
             InetAddress address = InetAddress.getLocalHost();
             clientSocket = new Socket(address, PORT);
 
-            InputStream inputStream = clientSocket.getInputStream();
             OutputStream outputStream = clientSocket.getOutputStream();
-            DataInputStream dataInputStream = new DataInputStream(inputStream);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             PrintStream printStream = new PrintStream(outputStream);
 
-            printStream.println("pop");
-            System.out.println(dataInputStream.readLine());
+            String message;
+            final Scanner scanner = new Scanner(System.in);
+            while(!(message = scanner.nextLine()).equals("exit")) {
+                printStream.println(message);
+                System.out.println(reader.readLine());
+            }
 
+            scanner.close();
             clientSocket.close();
         } catch (UnknownHostException  exception) {
             System.out.println("Exception: " + exception.getMessage());
