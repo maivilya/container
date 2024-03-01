@@ -20,7 +20,17 @@ public class Server {
                 //TODO: Client
             }
         } catch (IOException exception) {
-            //TODO: сделать метод закрытия ресурсов
+            closeResources();
+        }
+    }
+
+    private void closeResources() {
+        if (serverSocket != null) {
+            try {
+                serverSocket.close();
+            } catch (IOException exception) {
+                System.out.println("Exception: " + exception.getMessage());
+            }
         }
     }
 }
