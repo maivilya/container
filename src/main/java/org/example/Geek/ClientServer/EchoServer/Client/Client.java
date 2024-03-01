@@ -1,4 +1,4 @@
-package org.example.Geek.ClientServer.Client;
+package org.example.Geek.ClientServer.EchoServer.Client;
 
 import java.io.*;
 import java.net.InetAddress;

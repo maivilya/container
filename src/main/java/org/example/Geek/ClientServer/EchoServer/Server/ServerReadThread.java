@@ -1,4 +1,4 @@
-package org.example.Geek.ClientServer.Server;
+package org.example.Geek.ClientServer.EchoServer.Server;
 
 import java.io.*;
 import java.net.Socket;
