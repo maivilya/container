@@ -6,7 +6,8 @@ import java.net.Socket;
 
 public class Server {
 
-    private ServerSocket serverSocket;
+    private final ServerSocket serverSocket;
+    private static final int PORT = 4304;
 
     public Server(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
@@ -29,8 +30,18 @@ public class Server {
             try {
                 serverSocket.close();
             } catch (IOException exception) {
-                System.out.println("Exception: " + exception.getMessage());
+                System.out.println("Exception: " + exception);
             }
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            ServerSocket serverSocket = new ServerSocket(PORT);
+            Server server = new Server(serverSocket);
+            server.runServer();
+        } catch (IOException exception) {
+            System.out.println("Exception: " + exception);
         }
     }
 }
