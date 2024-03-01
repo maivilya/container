@@ -22,7 +22,7 @@ public class ClientManager {
             clients.add(this);
             broadcastMessage("Server(" + socket.getPort() + ")подключился новый клиента " + name);
         } catch (IOException exception) {
-            //TODO:Метод закрития ресурсов
+            closeResources(socket, reader, writer);
         }
     }
 
@@ -34,9 +34,25 @@ public class ClientManager {
                     client.writer.newLine();
                     client.writer.flush();
                 } catch (IOException exception) {
-                    //TODO:Метод закрития ресурсов
+                    closeResources(socket, reader, writer);
                 }
             }
+        }
+    }
+
+    private void closeResources(Socket socket, BufferedReader reader, BufferedWriter writer) {
+        try {
+            if (writer != null) {
+                writer.close();
+            }
+            if (reader != null) {
+                reader.close();
+            }
+            if (socket != null) {
+                socket.close();
+            }
+        } catch (IOException exception) {
+            System.out.println("Exception: " + exception.getMessage());
         }
     }
 }
