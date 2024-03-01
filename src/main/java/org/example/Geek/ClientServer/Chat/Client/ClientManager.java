@@ -20,9 +20,23 @@ public class ClientManager {
             writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             name = reader.readLine();
             clients.add(this);
-            //TODO: метод, который разошлет всем информацию о новое подключенном пользователе
+            broadcastMessage("Server(" + socket.getPort() + ")подключился новый клиента " + name);
         } catch (IOException exception) {
             //TODO:Метод закрития ресурсов
+        }
+    }
+
+    private void broadcastMessage(String message) {
+        for (ClientManager client : clients) {
+            if (!client.name.equals(name)) {
+                try {
+                    client.writer.write(message);
+                    client.writer.newLine();
+                    client.writer.flush();
+                } catch (IOException exception) {
+                    //TODO:Метод закрития ресурсов
+                }
+            }
         }
     }
 }
