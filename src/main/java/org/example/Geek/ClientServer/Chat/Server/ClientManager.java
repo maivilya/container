@@ -1,4 +1,4 @@
-package org.example.Geek.ClientServer.Chat.Client;
+package org.example.Geek.ClientServer.Chat.Server;
 
 import java.io.*;
 import java.net.Socket;
