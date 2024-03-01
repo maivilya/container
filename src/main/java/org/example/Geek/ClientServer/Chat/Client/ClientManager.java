@@ -28,7 +28,16 @@ public class ClientManager implements Runnable{
 
     @Override
     public void run() {
-
+        String message;
+        while(socket.isConnected()) {
+            try {
+                message = reader.readLine();
+                broadcastMessage(message);
+            } catch (IOException exception) {
+                closeResources(socket, reader, writer);
+                break;
+            }
+        }
     }
 
     private void broadcastMessage(String message) {
