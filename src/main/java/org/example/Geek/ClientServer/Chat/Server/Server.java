@@ -18,7 +18,9 @@ public class Server {
             while (!serverSocket.isClosed()) {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Accepted new client");
-                //TODO: Client
+                ClientManager client = new ClientManager(clientSocket);
+                Thread thread = new Thread(client);
+                thread.start();
             }
         } catch (IOException exception) {
             closeResources();
