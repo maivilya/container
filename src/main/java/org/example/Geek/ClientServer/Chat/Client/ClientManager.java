@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientManager {
+public class ClientManager implements Runnable{
 
     private final Socket socket;
     private BufferedReader reader;
@@ -20,10 +20,15 @@ public class ClientManager {
             writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             name = reader.readLine();
             clients.add(this);
-            broadcastMessage("Server(" + socket.getPort() + ")подключился новый клиента " + name);
+            broadcastMessage("Server(" + socket.getPort() + "): подключился новый пользователь " + name);
         } catch (IOException exception) {
             closeResources(socket, reader, writer);
         }
+    }
+
+    @Override
+    public void run() {
+
     }
 
     private void broadcastMessage(String message) {
@@ -41,6 +46,8 @@ public class ClientManager {
     }
 
     private void closeResources(Socket socket, BufferedReader reader, BufferedWriter writer) {
+        clients.remove(this);
+        broadcastMessage("Server(" + socket.getPort() + "): пользователь " + name + " отключился");
         try {
             if (writer != null) {
                 writer.close();
