@@ -12,6 +12,11 @@ public class Client {
     private BufferedWriter writer;
     private final String name;
 
+    /**
+     * Базовый конструктор для инициализации пользователя
+     * @param socket сокет для коммуникации с сервером
+     * @param name имя пользователя
+     */
     public Client(Socket socket, String name) {
         this.socket = socket;
         this.name = name;
@@ -23,6 +28,9 @@ public class Client {
         }
     }
 
+    /**
+     * Отдельный поток, который будет слушать сообщения от других пользователей
+     */
     public void listenMessage() {
         new Thread(() -> {
             try {
@@ -37,6 +45,9 @@ public class Client {
         }).start();
     }
 
+    /**
+     * Метод отправки сообщения.
+     */
     public void sendMessage() {
         try{
             writer.write(name);
@@ -56,6 +67,12 @@ public class Client {
         }
     }
 
+    /**
+     * Метод, закрывающий все ресурсы
+     * @param socket сокет, который требуется закрыть
+     * @param reader буферизированный поток чтения, который нужно закрыть
+     * @param writer буферизированный поток записи, который нужно закрыть
+     */
     private void closeResources(Socket socket, BufferedReader reader, BufferedWriter writer) {
         try {
             if (writer != null) {
@@ -72,6 +89,10 @@ public class Client {
         }
     }
 
+    /**
+     * Точка старта нашего клиента. Создает клиента и запускает потоки на слушание и отправку сообщений
+     * @param args входные параметры нашего приложения
+     */
     public static void main(String[] args) {
         try {
             Scanner scanner = new Scanner(System.in);
