@@ -26,6 +26,9 @@ public class ClientManager implements Runnable{
         }
     }
 
+    /**
+     * Метод рассылает сообщения всем пользователям от другого пользователя
+     */
     @Override
     public void run() {
         String message;
@@ -40,6 +43,10 @@ public class ClientManager implements Runnable{
         }
     }
 
+    /**
+     * Метод отправки сообщения всем пользователям
+     * @param message сообщение, которое нужно отправить
+     */
     private void broadcastMessage(String message) {
         for (ClientManager client : clients) {
             if (!client.name.equals(name)) {
@@ -54,6 +61,12 @@ public class ClientManager implements Runnable{
         }
     }
 
+    /**
+     * Метод, закрывающий все ресурсы
+     * @param socket сокет, который требуется закрыть
+     * @param reader буферизированный поток чтения, который нужно закрыть
+     * @param writer буферизированный поток записи, который нужно закрыть
+     */
     private void closeResources(Socket socket, BufferedReader reader, BufferedWriter writer) {
         clients.remove(this);
         broadcastMessage("Server(" + socket.getPort() + "): пользователь " + name + " отключился");
