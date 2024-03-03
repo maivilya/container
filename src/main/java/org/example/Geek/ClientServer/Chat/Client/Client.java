@@ -22,6 +22,20 @@ public class Client {
         }
     }
 
+    public void listenMessage() {
+        new Thread(() -> {
+            try {
+                String message;
+                while(socket.isConnected()) {
+                    message = reader.readLine();
+                    System.out.println(message);
+                }
+            } catch (IOException exception) {
+                closeResources(socket, reader, writer);
+            }
+        }).start();
+    }
+
     public void sendMessage() {
         try{
             writer.write(name);
