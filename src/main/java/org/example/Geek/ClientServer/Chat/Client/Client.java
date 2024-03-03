@@ -1,6 +1,7 @@
 package org.example.Geek.ClientServer.Chat.Client;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -66,6 +67,20 @@ public class Client {
             if (socket != null) {
                 socket.close();
             }
+        } catch (IOException exception) {
+            System.out.println("Exception: " + exception.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter your name: ");
+            String name = scanner.nextLine();
+            Socket socket = new Socket(InetAddress.getLocalHost(), 4304);
+            Client client = new Client(socket, name);
+            client.listenMessage();
+            client.sendMessage();
         } catch (IOException exception) {
             System.out.println("Exception: " + exception.getMessage());
         }
