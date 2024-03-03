@@ -6,13 +6,24 @@ import java.net.Socket;
 
 public class Server {
 
-    private final ServerSocket serverSocket;
+    /**
+     * Порт, на котором мы будем слушать пользователей
+     */
     private static final int PORT = 4304;
+    private final ServerSocket serverSocket;
 
+    /**
+     * Базовый конструктор создания нашего сервера
+     * @param serverSocket сокет, на основе которого будет создаваться сервер
+     */
     public Server(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
     }
 
+    /**
+     * Метод ожидает запросы на подключения и если подключение удалось
+     * создает новых пользователей(сокеты) и запускаем их в отдельном новом потоке
+     */
     public void runServer() {
         try {
             while (!serverSocket.isClosed()) {
@@ -26,7 +37,9 @@ public class Server {
             closeResources();
         }
     }
-
+    /**
+     * Метод, закрывающий ресурсы сервера. В данном случае это только сокет
+     */
     private void closeResources() {
         if (serverSocket != null) {
             try {
@@ -37,6 +50,10 @@ public class Server {
         }
     }
 
+    /**
+     * Метод запускает работу сервера
+     * @param args входные параметры нашего приложения
+     */
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket(PORT);
