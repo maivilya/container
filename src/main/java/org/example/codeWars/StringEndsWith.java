@@ -25,4 +25,8 @@ public class StringEndsWith {
         }
         return string.substring(string.length() - ending.length()).contains(ending);
     }
+
+    private static boolean solution2(String string, String ending) {
+        return string.endsWith(ending);
+    }
 }
